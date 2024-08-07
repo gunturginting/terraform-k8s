@@ -5,4 +5,5 @@ locals {
     zone-2      = "ap-southeast-1b"
     zone-3      = "ap-southeast-1c"
     eks_name    = "ecosystem"
+    eks_version = "1.28"
 }
