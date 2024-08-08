@@ -32,8 +32,8 @@ resource "aws_eks_cluster" "eks" {
         aws_subnet.private_subnet_2.id
       ]
 
-      endpoint_private_access = true
-      endpoint_public_access = false
+      endpoint_private_access = false
+      endpoint_public_access = true
     }
 
     access_config {
