@@ -1,6 +1,4 @@
-module "aws_eks_cluster" {
-    source = "../../7-eksMaster.tf"
-}
+
 
 resource "aws_iam_user" "developer" {
     name = "developer"
@@ -32,7 +30,7 @@ resource "aws_iam_user_policy_attachment" "developer_eks" {
 }
 
 resource "aws_eks_access_entry" "developer" {
-    cluster_name =   module.aws_eks_cluster.eks.name
+    cluster_name =   aws_eks_cluster.eks.name
     principal_arn = aws_iam_user.developer.arn
     kubernetes_groups = [ "my-viewer" ]
 }
