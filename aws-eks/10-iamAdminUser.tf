@@ -7,6 +7,7 @@ variable "create_admin_user" {
 data "aws_caller_identity" "current" {}
 
 resource "aws_iam_role" "eks_admin" {
+    count = var.create_developer_user ? 1 : 0
     name = "${local.env}-${local.eks_name}-eks-admin"
 
     assume_role_policy = <<POLICY
@@ -26,6 +27,7 @@ POLICY
 }
 
 resource "aws_iam_policy" "eks_admin" {
+    count = var.create_developer_user ? 1 : 0
     name = "AmazonEKSAdminPolicy"
 
     policy = <<POLICY
@@ -55,15 +57,18 @@ POLICY
 }
 
 resource "aws_iam_role_policy_attachment" "eks_admin" {
+    count = var.create_developer_user ? 1 : 0
     role = aws_iam_role.eks_admin.name
     policy_arn = aws_iam_policy.eks_admin.arn
 }
 
 resource "aws_iam_user" "admin" {
+    count = var.create_developer_user ? 1 : 0
     name = "admin"
 }
 
 resource "aws_iam_policy" "eks_assume_admin" {
+    count = var.create_developer_user ? 1 : 0
     name = "AmazonEKSAssumeAdminPolicy"
 
     policy = <<POLICY
@@ -83,11 +88,13 @@ POLICY
 }
 
 resource "aws_iam_user_policy_attachment" "admin" {
+    count = var.create_developer_user ? 1 : 0
     user = aws_iam_user.admin.name
     policy_arn = aws_iam_policy.eks_assume_admin.arn
 }
 
 resource "aws_eks_access_entry" "admin" {
+    count = var.create_developer_user ? 1 : 0
     cluster_name = aws_eks_cluster.eks.name
     principal_arn = aws_iam_role.eks_admin.arn
     kubernetes_groups = [ "my-admin" ]
