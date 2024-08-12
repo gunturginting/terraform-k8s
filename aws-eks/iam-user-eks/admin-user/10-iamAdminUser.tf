@@ -1,7 +1,14 @@
+module "my_module" {
+    source = "../../module"
+    eks = "ecosystem"
+    eks_version = "1.28"
+    env = "dev"
+}
+
 data "aws_caller_identity" "current" {}
 
 resource "aws_iam_role" "eks_admin" {
-    name = "${local.env}-${local.eks_name}-eks-admin"
+    name = "${env}-${eks}-eks-admin"
 
     assume_role_policy = <<POLICY
 {
