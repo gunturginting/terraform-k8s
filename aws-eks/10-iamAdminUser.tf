@@ -1,3 +1,9 @@
+variable "create_admin_user" {
+  description = "Set this to true to create the admin user"
+  type        = bool
+  default     = false
+}
+
 data "aws_caller_identity" "current" {}
 
 resource "aws_iam_role" "eks_admin" {

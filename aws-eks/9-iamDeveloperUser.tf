@@ -1,4 +1,8 @@
-
+variable "create_developer_user" {
+  description = "Set this to true to create the developer user"
+  type        = bool
+  default     = false
+}
 
 resource "aws_iam_user" "developer" {
     name = "developer"
