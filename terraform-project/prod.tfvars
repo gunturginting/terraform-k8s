@@ -1,2 +1,2 @@
 eks_name = "ecosystem"
-environment = "prod"
+env = "prod"
