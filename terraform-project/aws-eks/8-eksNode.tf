@@ -1,5 +1,5 @@
 resource "aws_iam_role" "iam_role_nodes" {
-    name = "${local.env}-${local.eks_name}-eks-nodes"
+    name = "${var.env}-${var.eks_name}-eks-nodes"
     assume_role_policy = <<POLICY
 {
   "Version": "2012-10-17",
